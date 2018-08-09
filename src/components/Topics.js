@@ -4,11 +4,22 @@ import { ListGroup, ListGroupItem, ListGroupItemProps } from "react-bootstrap";
 class Topics extends Component {
   render() {
     return (
-      <ListGroup>
-        <ListGroupItem>Item 1</ListGroupItem>
-        <ListGroupItem>Item 2</ListGroupItem>
-        <ListGroupItem>...</ListGroupItem>
-      </ListGroup>
+      <React.Fragment>
+        <p className="section-title">Topics</p>
+        <ListGroup className="topics">
+          <ListGroupItem>🚀 Development</ListGroupItem>
+          <ListGroupItem>🖥 System</ListGroupItem>
+          <ListGroupItem>🛠 Tools</ListGroupItem>
+          <ListGroupItem>📉 Data Science</ListGroupItem>
+          <ListGroupItem>⛓ Blockchain</ListGroupItem>
+          <ListGroupItem>📱 Mobile</ListGroupItem>
+          <ListGroupItem>✨ Awesome Lists</ListGroupItem>
+          <ListGroupItem>🤟🏻Social</ListGroupItem>
+          <ListGroupItem>🖼 Visual</ListGroupItem>
+          <ListGroupItem>🍺 Open Source</ListGroupItem>
+          <ListGroupItem>🗃 All Topics</ListGroupItem>
+        </ListGroup>
+      </React.Fragment>
     );
   }
 }
