@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
+import Loading from "./Loading";
 
 const NewsItem = props => {
   // const tags = props.tags;
@@ -39,6 +40,7 @@ const NewsItem = props => {
 class Today extends Component {
   state = {
     results: [],
+    topic: "",
     loading: true
   };
   componentDidMount() {
@@ -50,27 +52,42 @@ class Today extends Component {
         }
       });
   }
+  getTopic = topic => {
+    axios
+      .get(`https://hn.algolia.com/api/v1/search?query=${topic}&tags=story`)
+      .then(data => {
+        if (this.state.loading) {
+          this.setState({ loading: false, results: data.data.hits });
+        }
+      });
+  };
   render() {
     return (
-      <ListGroup>
-        {this.state.results.map(result => {
-          return (
-            <ListGroupItem className="news-item" key={result.id}>
-              <NewsItem
-                points={result.points}
-                num_comments={result.num_comments}
-                url={result.url}
-                title={result.title}
-                created_at={result.created_at}
-                author={result.author}
-                url={result.url}
-                // tags=
-                // {result.tags}
-              />
-            </ListGroupItem>
-          );
-        })}
-      </ListGroup>
+      <React.Fragment>
+        {this.state.loading ? (
+          <Loading />
+        ) : (
+          <ListGroup>
+            {this.state.results.map(result => {
+              return (
+                <ListGroupItem className="news-item" key={result.id}>
+                  <NewsItem
+                    points={result.points}
+                    num_comments={result.num_comments}
+                    url={result.url}
+                    title={result.title}
+                    created_at={result.created_at}
+                    author={result.author}
+                    url={result.url}
+                    // tags=
+                    // {result.tags}
+                  />
+                </ListGroupItem>
+              );
+            })}
+          </ListGroup>
+        )}
+      </React.Fragment>
     );
   }
 }
