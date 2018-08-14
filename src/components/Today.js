@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
 import Loading from "./Loading";
+import moment from "moment";
 
 const NewsItem = props => {
   // const tags = props.tags;
@@ -27,7 +28,10 @@ const NewsItem = props => {
           <h4 className="title">{props.title}</h4>
           <div className="post-tags">
             <p className="timestamp">
-              {props.created_at} by {props.author}
+              {moment()
+                .startOf("props.created_at")
+                .fromNow()}{" "}
+              by {props.author}
             </p>
             {/* <ul className="tags">{NewsItemTags}</ul> */}
           </div>
@@ -64,6 +68,7 @@ class Today extends Component {
   render() {
     return (
       <React.Fragment>
+        <p className="section-title">Today</p>
         {this.state.loading ? (
           <Loading />
         ) : (
@@ -79,9 +84,9 @@ class Today extends Component {
                     created_at={result.created_at}
                     author={result.author}
                     url={result.url}
-                    // tags=
-                    // {result.tags}
                   />
+                  {/* // tags=
+                  {result.tags} // */}
                 </ListGroupItem>
               );
             })}

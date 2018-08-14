@@ -16,9 +16,14 @@ body {
 .section-title {
   text-transform: uppercase;
 }
+.list-group-item {
+  border: none;
+}
 .news-item {
   display: grid;
   grid-template-columns: 1fr 11fr;
+  margin-bottom: 0px;
+  border-bottom: 1px solid #ddd;
 }
 .news-item h4 {
   margin-top: 0;
